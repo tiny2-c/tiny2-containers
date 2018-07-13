@@ -2,6 +2,10 @@
 
 A container library for C.
 
+# Dependencies
+
+This library depends on the [tiny2-object](https://github.com/handicraftsman/tiny2-object) library.
+
 # Building
 
 ```bash
