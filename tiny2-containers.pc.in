@@ -1,0 +1,6 @@
+Name: tiny2-containers
+Description: A container library for C
+Version: @PROJECT_VERSION@
+Requires: tiny2-object
+Cflags: -I@CMAKE_INSTALL_PREFIX@/include/
+Libs: -L@CMAKE_INSTALL_PREFIX@/lib/ -ltiny2-containers
