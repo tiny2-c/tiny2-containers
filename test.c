@@ -184,12 +184,23 @@ void test_maps() {
   $unref(map);
 }
 
+void test_hashes() {
+
+}
+
 int main() {
+  /* old containers */
   test_strings();
   test_lists();
   test_vectors();
   test_queues();
   test_maps();
+
+  /* new containers */
+  test_hashes();
+
+  /* type stuff */
+  to_dump_type_tree();
 
   return 0;
 }
