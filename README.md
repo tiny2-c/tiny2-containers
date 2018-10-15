@@ -6,6 +6,8 @@ A container library for C.
 
 This library depends on the [tiny2-object](https://github.com/handicraftsman/tiny2-object) library.
 
+If building on Windows, you must specify path to it by setting T2O_PATH CMake variable.
+
 # Building
 
 ```bash

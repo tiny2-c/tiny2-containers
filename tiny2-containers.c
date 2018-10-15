@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#define strdup _strdup
+#endif
+
 /*
  * Utils
  */
@@ -95,13 +99,26 @@ static TCString* tc_string_copy(TCString* self) {
   return s;
 }
 
+static void tc_concat(char** out, const char* s1, const char* s2) {
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+  size_t sz = strlen(s1) + strlen(s2) + 1;
+  char* r = (char*)malloc(sz);
+  memset(r, 0, sz);
+  strcat_s(r, sz, s1);
+  strcat_s(r, sz, s2);
+  *out = r;
+#else
+  asprintf(out, "%s%s", s1, s2);
+#endif
+}
+
 static void tc_string_append(TCString* self, TCString* other) {
   $ref(self);
   $ref(other);
 
   char* old = self->str;
 
-  asprintf(&(self->str), "%s%s", old, other->str);
+  tc_concat(&(self->str), old, other->str);
 
   free(old);
 
@@ -114,7 +131,7 @@ static void tc_string_appendc(TCString* self, const char* other) {
 
   char* old = self->str;
 
-  asprintf(&(self->str), "%s%s", old, other);
+  tc_concat(&(self->str), old, other);
 
   free(old);
 
@@ -127,7 +144,7 @@ static void tc_string_prepend(TCString* self, TCString* other) {
 
   char* old = self->str;
 
-  asprintf(&(self->str), "%s%s", other->str, old);
+  tc_concat(&(self->str), other->str, old);
 
   free(old);
 
@@ -140,7 +157,7 @@ static void tc_string_prependc(TCString* self, const char* other) {
 
   char* old = self->str;
 
-  asprintf(&(self->str), "%s%s", other, old);
+  tc_concat(&(self->str), other, old);
 
   free(old);
 

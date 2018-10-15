@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#define strdup _strdup
+#endif
+
 void test_strings() {
   char* s = strdup("foo bar baz");
   TCString* str = $new(TCString, s);
@@ -51,7 +55,13 @@ void test_lists() {
   TCList* l2 = $new(TCList);
   for (int i = 0; i < 1024; ++i) {
     char* s = NULL;
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+    size_t sz = _scprintf("%d", i) + 1;
+    s = (char*)malloc(sz);
+    sprintf_s(s, sz, "%d", i);
+#else
     asprintf(&s, "%d", i);
+#endif
     TCString* str = $new(TCString, s);
     $(TCList, l2, append, (TObject*) str);
     $unref(str);
@@ -68,7 +78,13 @@ TCVector* get_vector() {
 
   for (int i = 0; i < 128; ++i) {
     char* s = NULL;
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+    size_t sz = _scprintf("%d", i) + 1;
+    s = (char*)malloc(sz);
+    sprintf_s(s, sz, "%d", i);
+#else
     asprintf(&s, "%d", i);
+#endif
     TCString* str = $new(TCString, s);
     $(TCVector, vector, push_back, (TObject*) str);
     $unref(str);
