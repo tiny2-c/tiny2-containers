@@ -202,5 +202,10 @@ int main() {
   /* type stuff */
   to_dump_type_tree();
 
+#if (defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)) && defined(_DEBUG)
+  printf("Press any key to continue\n");
+  system("pause");
+#endif
+
   return 0;
 }

@@ -66,6 +66,7 @@ static TCString* tc_string_constructor(TCString* self, const char* str) {
 }
 
 static void tc_string_destructor(TCString* self) {
+  assert(self != NULL);
   assert($is(self, TCString));
 
   if (self->str != NULL) {
@@ -80,12 +81,14 @@ static void tc_string_init_vtable(TCStringVTable* v) {
 }
 
 static char* tc_string_str(TCString* self) {
+  assert(self != NULL);
   assert($is(self, TCString));
 
   return self->str;
 }
 
 static size_t tc_string_size(TCString* self) {
+  assert(self != NULL);
   assert($is(self, TCString));
   
   $ref(self);
@@ -98,6 +101,7 @@ static size_t tc_string_size(TCString* self) {
 }
 
 static TCString* tc_string_copy(TCString* self) {
+  assert(self != NULL);
   assert($is(self, TCString));
 
   $ref(self);
@@ -123,6 +127,7 @@ static void tc_concat(char** out, const char* s1, const char* s2) {
 }
 
 static void tc_string_append(TCString* self, TCString* other) {
+  assert(self != NULL);
   assert($is(self, TCString));
 
   $ref(self);
@@ -139,6 +144,7 @@ static void tc_string_append(TCString* self, TCString* other) {
 }
 
 static void tc_string_appendc(TCString* self, const char* other) {
+  assert(self != NULL);
   assert($is(self, TCString));
 
   $ref(self);
@@ -153,6 +159,7 @@ static void tc_string_appendc(TCString* self, const char* other) {
 }
 
 static void tc_string_prepend(TCString* self, TCString* other) {
+  assert(self != NULL);
   assert($is(self, TCString));
 
   $ref(self);
@@ -169,6 +176,7 @@ static void tc_string_prepend(TCString* self, TCString* other) {
 }
 
 static void tc_string_prependc(TCString* self, const char* other) {
+  assert(self != NULL);
   assert($is(self, TCString));
 
   $ref(self);
@@ -217,6 +225,7 @@ static TCListNode* tc_list_node_constructor(TCListNode* self, TObject* obj) {
 }
 
 static void tc_list_node_destructor(TCListNode* self) {
+  assert(self != NULL);
   assert($is(self, TCListNode));
   if (self->obj != NULL) $unref(self->obj);
   $destroy_parent(TObject, self);
@@ -227,6 +236,7 @@ static void tc_list_node_init_vtable(TCListNodeVTable* v) {
 }
 
 static TObject* tc_list_node_obj(TCListNode* self) {
+  assert(self != NULL);
   assert($is(self, TCListNode));
 
   $ref(self);
@@ -240,6 +250,7 @@ static TObject* tc_list_node_obj(TCListNode* self) {
 }
 
 static TCListNode* tc_list_node_next(TCListNode* self) {
+  assert(self != NULL);
   assert($is(self, TCListNode));
 
   $ref(self);
@@ -253,6 +264,7 @@ static TCListNode* tc_list_node_next(TCListNode* self) {
 }
 
 static TCListNode* tc_list_node_prev(TCListNode* self) {
+  assert(self != NULL);
   assert($is(self, TCListNode));
 
   $ref(self);
@@ -299,6 +311,7 @@ static TCList* tc_list_constructor(TCList* self) {
 }
 
 static void tc_list_destructor(TCList* self) {
+  assert(self != NULL);
   assert($is(self, TCList));
   TCListNode* next = NULL;
   TCListNode* n = self->head;
@@ -316,6 +329,7 @@ static void tc_list_init_vtable(TCListVTable* v) {
 }
 
 static void tc_list_append(TCList* self, TObject* obj) {
+  assert(self != NULL);
   assert($is(self, TCList));
 
   $ref(self);
@@ -339,6 +353,7 @@ static void tc_list_append(TCList* self, TObject* obj) {
 }
 
 static void tc_list_prepend(TCList* self, TObject* obj) {
+  assert(self != NULL);
   assert($is(self, TCList));
   
   $ref(self);
@@ -362,6 +377,7 @@ static void tc_list_prepend(TCList* self, TObject* obj) {
 }
 
 static void tc_list_remove(TCList* self, TCListNode* n) {
+  assert(self != NULL);
   assert($is(self, TCList));
   
   $ref(self);
@@ -392,6 +408,7 @@ static void tc_list_remove(TCList* self, TCListNode* n) {
 }
 
 static void tc_list_foreach(TCList* self, TCListIterator iter, void* userdata) {
+  assert(self != NULL);
   assert($is(self, TCList));
   
   $ref(self);
@@ -455,6 +472,7 @@ static TCVector* tc_vector_constructor(TCVector* self, size_t prealloc, size_t s
 }
 
 static void tc_vector_destructor(TCVector* self) {
+  assert(self != NULL);
   assert($is(self, TCVector));
   for (int i = 0; i < self->len; ++i) {
     if (self->arr[i] != NULL)
@@ -469,6 +487,7 @@ static void tc_vector_init_vtable(TCVectorVTable* v) {
 }
 
 static void tc_vector_push_back(TCVector* self, TObject* obj) {
+  assert(self != NULL);
   assert($is(self, TCVector));
   
   $ref(self);
@@ -485,6 +504,7 @@ static void tc_vector_push_back(TCVector* self, TObject* obj) {
 }
 
 static void tc_vector_push_front(TCVector* self, TObject* obj) {
+  assert(self != NULL);
   assert($is(self, TCVector));
   
   $ref(self);
@@ -493,6 +513,7 @@ static void tc_vector_push_front(TCVector* self, TObject* obj) {
 }
 
 static TObject* tc_vector_pop_back(TCVector* self) {
+  assert(self != NULL);
   assert($is(self, TCVector));
   
   $ref(self);
@@ -521,6 +542,7 @@ static TObject* tc_vector_pop_back(TCVector* self) {
 }
 
 static TObject* tc_vector_pop_front(TCVector* self) {
+  assert(self != NULL);
   assert($is(self, TCVector));
   
   $ref(self);
@@ -544,6 +566,7 @@ static TObject* tc_vector_pop_front(TCVector* self) {
 }
 
 static void tc_vector_insert(TCVector* self, TObject* obj, size_t idx) {
+  assert(self != NULL);
   assert($is(self, TCVector));
   
   $ref(self);
@@ -559,7 +582,7 @@ static void tc_vector_insert(TCVector* self, TObject* obj, size_t idx) {
     self->arr = realloc(self->arr, sizeof(TObject*) * (self->alloc + self->step));
     self->alloc += self->step;
   }
-  for (int i = self->len; i > idx; --i) {
+  for (size_t i = self->len; i > idx; --i) {
     self->arr[i] = self->arr[i-1];
   }
   self->arr[idx] = obj;
@@ -569,6 +592,7 @@ static void tc_vector_insert(TCVector* self, TObject* obj, size_t idx) {
 }
 
 static TObject* tc_vector_get(TCVector* self, size_t idx) {
+  assert(self != NULL);
   assert($is(self, TCVector));
   
   $ref(self);
@@ -586,6 +610,7 @@ static TObject* tc_vector_get(TCVector* self, size_t idx) {
 }
 
 static void tc_vector_remove(TCVector* self, size_t idx) {
+  assert(self != NULL);
   assert($is(self, TCVector));
 
   $ref(self);
@@ -595,7 +620,7 @@ static void tc_vector_remove(TCVector* self, size_t idx) {
     return;
   }
   $unref(self->arr[idx]);
-  for (int i = idx; i < self->len; ++i) {
+  for (size_t i = idx; i < self->len; ++i) {
     if (i != self->len - 1)
       self->arr[i] = self->arr[i+1];
   }
@@ -605,6 +630,7 @@ static void tc_vector_remove(TCVector* self, size_t idx) {
 }
 
 static void tc_vector_clear(TCVector* self) {
+  assert(self != NULL);
   assert($is(self, TCVector));
 
   $ref(self);
@@ -654,6 +680,7 @@ static TCQueue* tc_queue_constructor(TCQueue* self, size_t alloc) {
 }
 
 static void tc_queue_destructor(TCQueue* self) {
+  assert(self != NULL);
   assert($is(self, TCQueue));
 
   for (TObject* o = $(TCQueue, self, pop); o != NULL; o = $(TCQueue, self, pop)) {
@@ -670,6 +697,7 @@ static void tc_queue_init_vtable(TCQueueVTable* v) {
 }
 
 static bool tc_queue_push(TCQueue* self, TObject* obj) {
+  assert(self != NULL);
   assert($is(self, TCQueue));
 
   $ref(self);
@@ -691,6 +719,7 @@ static bool tc_queue_push(TCQueue* self, TObject* obj) {
 }
 
 static TObject* tc_queue_pop(TCQueue* self) {
+  assert(self != NULL);
   assert($is(self, TCQueue));
   
   $ref(self);
@@ -711,6 +740,7 @@ static TObject* tc_queue_pop(TCQueue* self) {
 }
 
 static TObject* tc_queue_peek(TCQueue* self) {
+  assert(self != NULL);
   assert($is(self, TCQueue));
 
   $ref(self);
@@ -761,6 +791,7 @@ static TCMapPair* tc_map_pair_constructor(TCMapPair* self, const char* key, TObj
 }
 
 static void tc_map_pair_destructor(TCMapPair* self) {
+  assert(self != NULL);
   assert($is(self, TCMapPair));
 
   $destroy_parent(TObject, self);
@@ -774,6 +805,7 @@ static void tc_map_pair_init_vtable(TCMapPairVTable* v) {
 }
 
 static void tc_map_pair_rename(TCMapPair* self, const char* key) {
+  assert(self != NULL);
   assert($is(self, TCMapPair));
 
   $ref(self);
@@ -786,6 +818,7 @@ static void tc_map_pair_rename(TCMapPair* self, const char* key) {
 }
 
 static void tc_map_pair_set(TCMapPair* self, TObject* value) {
+  assert(self != NULL);
   assert($is(self, TCMapPair));
 
   $ref(self);
@@ -798,6 +831,7 @@ static void tc_map_pair_set(TCMapPair* self, TObject* value) {
 }
 
 static TObject* tc_map_pair_get(TCMapPair* self) {
+  assert(self != NULL);
   assert($is(self, TCMapPair));
 
   $ref(self);
@@ -846,6 +880,7 @@ static TCMap* tc_map_constructor(TCMap* self) {
 }
 
 static void tc_map_destructor(TCMap* self) {
+  assert(self != NULL);
   assert($is(self, TCMap));
   $unref(self->pairs);
 
@@ -857,6 +892,7 @@ static void tc_map_init_vtable(TCMapVTable* v) {
 }
 
 static TObject* tc_map_get(TCMap* self, const char* key) {
+  assert(self != NULL);
   assert($is(self, TCMap));
 
   $ref(self);
@@ -884,6 +920,7 @@ static bool tc_map_get_iter(TCList* pairs, TCListNode* pairn, TCMapIter* iter) {
 }
 
 static TObject* tc_map_get_by_hash(TCMap* self, uint64_t hash) {
+  assert(self != NULL);
   assert($is(self, TCMap));
   
   $ref(self);
@@ -907,6 +944,7 @@ static TObject* tc_map_get_by_hash(TCMap* self, uint64_t hash) {
 }
 
 static void tc_map_set(TCMap* self, const char* key, TObject* value) {
+  assert(self != NULL);
   assert($is(self, TCMap));
 
   $ref(self);
@@ -919,6 +957,7 @@ static void tc_map_set(TCMap* self, const char* key, TObject* value) {
 }
 
 static void tc_map_rename(TCMap* self, const char* old_key, const char* new_key) {
+  assert(self != NULL);
   assert($is(self, TCMap));
 
   $ref(self);
@@ -953,6 +992,7 @@ static bool tc_map_remove_iter(TCList* pairs, TCListNode* pairn, TCMapIter* iter
 }
 
 static void tc_map_remove(TCMap* self, const char* key) {
+  assert(self != NULL);
   assert($is(self, TCMap));
 
   $ref(self);
@@ -963,6 +1003,7 @@ static void tc_map_remove(TCMap* self, const char* key) {
 }
 
 static void tc_map_remove_by_hash(TCMap* self, uint64_t hash) {
+  assert(self != NULL);
   assert($is(self, TCMap));
 
   $ref(self);
@@ -974,4 +1015,230 @@ static void tc_map_remove_by_hash(TCMap* self, uint64_t hash) {
   free(iter);
 
   $unref(self);
+}
+
+/*
+ * TCHashRBTree
+ */
+
+static TCHashRBTree* tc_hash_rb_tree_constructor(TCHashRBTree* self, uint64_t hash);
+static void tc_hash_rb_tree_destructor(TCHashRBTree* self);
+static void tc_hash_rb_tree_init_vtable(TCHashRBTreeVTable* v);
+static TCHashRBTree* tc_hash_rb_tree_parent(TCHashRBTree* self);
+static TCHashRBTree* tc_hash_rb_tree_grandparent(TCHashRBTree* self);
+static TCHashRBTree* tc_hash_rb_tree_sibling(TCHashRBTree* self);
+static TCHashRBTree* tc_hash_rb_tree_uncle(TCHashRBTree* self);
+static void tc_hash_rb_tree_set(TCHashRBTree* self, TObject* value);
+static TObject* tc_hash_rb_tree_get(TCHashRBTree* self);
+static void tc_hash_rb_tree_set_red(TCHashRBTree* self, bool red);
+static bool tc_hash_rb_tree_get_red(TCHashRBTree* self);
+
+$mtable_define(TCHashRBTree, tc_hash_rb_tree_constructor, tc_hash_rb_tree_destructor, tc_hash_rb_tree_init_vtable)
+  $mtable_define_method(TCHashRBTreeParent, parent, tc_hash_rb_tree_parent)
+  $mtable_define_method(TCHashRBTreeGrandparent, grandparent, tc_hash_rb_tree_grandparent)
+  $mtable_define_method(TCHashRBTreeSibling, sibling, tc_hash_rb_tree_sibling)
+  $mtable_define_method(TCHashRBTreeUncle, uncle, tc_hash_rb_tree_uncle)
+  $mtable_define_method(TCHashRBTreeSet, set, tc_hash_rb_tree_set)
+  $mtable_define_method(TCHashRBTreeGet, get, tc_hash_rb_tree_get)
+  $mtable_define_method(TCHashRBTreeSetRed, set_red, tc_hash_rb_tree_set_red)
+  $mtable_define_method(TCHashRBTreeGetRed, get_red, tc_hash_rb_tree_get_red)
+$mtable_define_end(TCHashRBTree)
+
+$vtable_define(TCHashRBTree)
+$vtable_define_end(TCHashRBTree)
+
+static TCHashRBTree* tc_hash_rb_tree_constructor(TCHashRBTree* self, uint64_t hash) {
+  $init(TObject, self);
+  $setup(TCHashRBTree, self, tc_hash_rb_tree_destructor);
+  $reg(TCHashRBTree, TObject);
+
+  self->left  = NULL;
+  self->right = NULL;
+  self->top   = NULL;
+  self->red   = false;
+  self->hash  = hash;
+  self->value = NULL;
+
+  return self;
+}
+
+static void tc_hash_rb_tree_destructor(TCHashRBTree* self) {
+  assert(self != NULL);
+  assert($is(self, TCHashRBTree));
+
+  $destroy_parent(TObject, self);
+}
+
+static void tc_hash_rb_tree_init_vtable(TCHashRBTreeVTable* v) {
+  $vtable_init(v, TCHashRBTree, TObject);
+}
+
+static TCHashRBTree* tc_hash_rb_tree_parent(TCHashRBTree* self) {
+  if (self == NULL) return NULL;
+
+  assert($is(self, TCHashRBTree));
+
+  $ref(self);
+
+  TCHashRBTree* p = self->top;
+  $ref(p);
+
+  $unref(self);
+
+  return p;
+}
+
+static TCHashRBTree* tc_hash_rb_tree_grandparent(TCHashRBTree* self) {
+  if (self == NULL) return NULL;
+
+  assert($is(self, TCHashRBTree));
+
+  $ref(self);
+
+  TCHashRBTree* n = NULL;
+  if (self->top != NULL)
+    n = self->top->top;
+  $ref(n);
+  
+  $unref(self);
+
+  return n;
+}
+
+static TCHashRBTree* tc_hash_rb_tree_sibling(TCHashRBTree* self) {
+  if (self == NULL) return NULL;
+
+  assert($is(self, TCHashRBTree));
+  
+  $ref(self);
+
+  TCHashRBTree* p = $(TCHashRBTree, self, parent);
+  if (p == NULL) {
+    $unref(self);
+    return NULL;
+  }
+
+  TCHashRBTree* n = NULL;
+  if (self == p->left) {
+    n = p->right;
+  } else {
+    n = p->left;
+  }
+  $ref(n);
+
+  $unref(p);
+  
+  $unref(self);
+
+  return n;
+}
+
+static TCHashRBTree* tc_hash_rb_tree_uncle(TCHashRBTree* self) {
+  if (self == NULL) return NULL;
+
+  assert($is(self, TCHashRBTree));
+
+  $ref(self);
+
+  TCHashRBTree* g = $(TCHashRBTree, self, grandparent);
+  TCHashRBTree* n = NULL;
+
+  if (g == NULL)
+    return NULL;
+
+  if (self->top == g->left) {
+    n = g->right;
+  } else {
+    n = g->left;
+  }
+
+  $ref(n);
+
+  $unref(g);
+  $unref(self);
+
+  return n;
+}
+
+static void tc_hash_rb_tree_set(TCHashRBTree* self, TObject* value) {
+  assert(self != NULL);
+  assert($is(self, TCHashRBTree));
+
+  $ref(self);
+
+  $ref(value);
+  $unref(self->value);
+  self->value = value;
+  
+  $unref(self);
+}
+
+static TObject* tc_hash_rb_tree_get(TCHashRBTree* self) {
+  assert(self != NULL);
+  assert($is(self, TCHashRBTree));
+
+  $ref(self);
+
+  TObject* o = self->value;
+  $ref(self->value);
+
+  $unref(self);
+
+  return o;
+}
+
+static void tc_hash_rb_tree_set_red(TCHashRBTree* self, bool red) {
+  assert(self != NULL);
+  assert($is(self, TCHashRBTree));
+
+  $ref(self);
+
+  self->red = red;
+
+  $unref(self);
+}
+
+static bool tc_hash_rb_tree_get_red(TCHashRBTree* self) {
+  assert(self != NULL);
+  assert($is(self, TCHashRBTree));
+
+  $ref(self);
+
+  bool red = self->red;
+
+  $unref(self);
+
+  return red;
+}
+
+/*
+ * TCHash
+ */
+
+static TCHash* tc_hash_constructor(TCHash* self);
+static void tc_hash_destructor(TCHash* self);
+static void tc_hash_init_vtable(TCHashVTable* v);
+
+$mtable_define(TCHash, tc_hash_constructor, tc_hash_destructor, tc_hash_init_vtable)
+$mtable_define_end(TCHash)
+
+$vtable_define(TCHash)
+$vtable_define_end(TCHash)
+
+static TCHash* tc_hash_constructor(TCHash* self) {
+  $init(TObject, self);
+  $setup(TCHash, self, tc_hash_destructor);
+  $reg(TCHash, TObject);
+
+  return self;
+}
+
+static void tc_hash_destructor(TCHash* self) {
+  assert($is(self, TCHash));
+
+  $destroy_parent(TObject, self);
+}
+
+static void tc_hash_init_vtable(TCHashVTable* v) {
+  $vtable_init(v, TCHash, TObject);
 }

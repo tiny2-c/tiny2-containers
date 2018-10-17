@@ -21,6 +21,8 @@ $class_decl(TCVector)
 $class_decl(TCQueue)
 $class_decl(TCMapPair)
 $class_decl(TCMap)
+$class_decl(TCHashRBTree)
+$class_decl(TCHash)
 
 /*
  * TCString
@@ -243,3 +245,57 @@ $mtable_end(TCMap)
 
 $vtable(TCMap, TObject)
 $vtable_end(TCMap)
+
+/*
+ * TCHashRBTree
+ */
+
+typedef TCHashRBTree* (*TCHashRBTreeConstructor)(TCHashRBTree* self, uint64_t hash);
+typedef void (*TCHashRBTreeInitVTable)(TCHashRBTreeVTable* v);
+typedef TCHashRBTree* (*TCHashRBTreeParent)(TCHashRBTree* self);
+typedef TCHashRBTree* (*TCHashRBTreeGrandparent)(TCHashRBTree* self);
+typedef TCHashRBTree* (*TCHashRBTreeSibling)(TCHashRBTree* self);
+typedef TCHashRBTree* (*TCHashRBTreeUncle)(TCHashRBTree* self);
+typedef void (*TCHashRBTreeSet)(TCHashRBTree* self, TObject* value);
+typedef TObject* (*TCHashRBTreeGet)(TCHashRBTree* self);
+typedef void (*TCHashRBTreeSetRed)(TCHashRBTree* self, bool red);
+typedef bool (*TCHashRBTreeGetRed)(TCHashRBTree* self);
+
+$class(TCHashRBTree, TObject, _parent)
+  $class_property(TCHashRBTree*, left)
+  $class_property(TCHashRBTree*, right)
+  $class_property(TCHashRBTree*, top)
+  $class_property(bool, red)
+  $class_property(uint64_t, hash)
+  $class_property(TObject*, value)
+$class_end(TCHashRBTree)
+
+$mtable(TCHashRBTree)
+  $mtable_method(TCHashRBTreeParent, parent)
+  $mtable_method(TCHashRBTreeGrandparent, grandparent)
+  $mtable_method(TCHashRBTreeSibling, sibling)
+  $mtable_method(TCHashRBTreeUncle, uncle)
+  $mtable_method(TCHashRBTreeSet, set)
+  $mtable_method(TCHashRBTreeGet, get)
+  $mtable_method(TCHashRBTreeSetRed, set_red)
+  $mtable_method(TCHashRBTreeGetRed, get_red)
+$mtable_end(TCHashRBTree)
+
+$vtable(TCHashRBTree, TObject)
+$vtable_end(TCHashRBTree)
+
+/*
+ * TCHash
+ */
+
+typedef TCHash* (*TCHashConstructor)(TCHash* self);
+typedef void (*TCHashInitVTable)(TCHashVTable* v);
+
+$class(TCHash, TObject, _parent)
+$class_end(TCHash)
+
+$mtable(TCHash)
+$mtable_end(TCHash)
+
+$vtable(TCHash, TObject)
+$vtable_end(TCHash)
